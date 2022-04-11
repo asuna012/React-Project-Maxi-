@@ -2,7 +2,7 @@ import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 import Card from "../UI/Card.js";
 import ExpenseFilter from "./ExpenseFilter";
-import react, { useState } from "react";
+import React, { useState } from "react";
 
 const Expenses = (props) => {
   //usestate is used to initialize a default year for the select element in expense filter component. this serves as a parent to child relationship component in which it sets the initial value of the expense filter component.
@@ -16,33 +16,22 @@ const Expenses = (props) => {
 
   // onSelectedYear is the properties of the child component that sets the value of the select element and throws the value to the Expenses.js using the saveSelected Year function.
 
+  //prop.listofExpenses.map is a function that automatically renders the contents of expenses array from App.js file. It gets all the items and populates the expense item component together with the items inside the expenses array.
   return (
     <div>
-      <ExpenseFilter
-        onSelectedYear={saveSelectedYear}
-        defaultYear={filteredYear}
-      />
       <Card className="expenses">
-        <ExpenseItem
-          title={props.listOfExpenses[0].title}
-          amount={props.listOfExpenses[0].amount}
-          date={props.listOfExpenses[0].date}
+        <ExpenseFilter
+          onSelectedYear={saveSelectedYear}
+          defaultYear={filteredYear}
         />
-        <ExpenseItem
-          title={props.listOfExpenses[1].title}
-          amount={props.listOfExpenses[1].amount}
-          date={props.listOfExpenses[1].date}
-        />
-        <ExpenseItem
-          title={props.listOfExpenses[2].title}
-          amount={props.listOfExpenses[2].amount}
-          date={props.listOfExpenses[2].date}
-        />
-        <ExpenseItem
-          title={props.listOfExpenses[3].title}
-          amount={props.listOfExpenses[3].amount}
-          date={props.listOfExpenses[3].date}
-        />
+
+        {props.listOfExpenses.map((expense) => (
+          <ExpenseItem
+            title={expense.title}
+            amount={expense.amount}
+            date={expense.date}
+          />
+        ))}
       </Card>
     </div>
   );
