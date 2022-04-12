@@ -17,9 +17,12 @@ const Expenses = (props) => {
 
   //prop.listofExpenses.map is a function that automatically renders the contents of expenses array from App.js file. It gets all the items and populates the expense item component together with the items inside the expenses array.
 
+  //created another function called filteredExpenses to display the items depending on the year selected by the user.
   const filteredExpenses = props.listOfExpenses.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
+
+  // we created another component called expensesList component to pass the new array containing all the items filtered per year. It has an argument with the function inside of it called filtered expenses.
 
   return (
     <div>
