@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./ExpenseFilter.css";
 // sets the function to be use by the onchange event. We used useState to allow us to change the value of a certain element.
 
 const ExpensesFilter = (props) => {
-  const [selectedYear, setYear] = useState("");
   //selectedYear is the special variable that receives the value of the event. setYear is the function that sets the variable.
   const yearChangeHandler = (event) => {
-    setYear(event.target.value);
-    props.onSelectedYear(selectedYear);
+    props.onSelectedYear(event.target.value);
 
     // props.onSelectedYear(selectedYear) throws the value to the parent element which is the Expenses.js or any other element that wishes to add this component
   };

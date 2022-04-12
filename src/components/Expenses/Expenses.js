@@ -1,9 +1,8 @@
-import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 import Card from "../UI/Card.js";
 import ExpenseFilter from "./ExpenseFilter";
 import React, { useState } from "react";
-
+import ExpensesList from "./ExpensesList";
 const Expenses = (props) => {
   //usestate is used to initialize a default year for the select element in expense filter component. this serves as a parent to child relationship component in which it sets the initial value of the expense filter component.
   const [filteredYear, setFilteredYear] = useState("2020");
@@ -17,21 +16,19 @@ const Expenses = (props) => {
   // onSelectedYear is the properties of the child component that sets the value of the select element and throws the value to the Expenses.js using the saveSelected Year function.
 
   //prop.listofExpenses.map is a function that automatically renders the contents of expenses array from App.js file. It gets all the items and populates the expense item component together with the items inside the expenses array.
+
+  const filteredExpenses = props.listOfExpenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === filteredYear;
+  });
+
   return (
     <div>
       <Card className="expenses">
         <ExpenseFilter
-          onSelectedYear={saveSelectedYear}
           defaultYear={filteredYear}
+          onSelectedYear={saveSelectedYear}
         />
-
-        {props.listOfExpenses.map((expense) => (
-          <ExpenseItem
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        ))}
+        <ExpensesList filteredExpenses={filteredExpenses} />
       </Card>
     </div>
   );
