@@ -3,6 +3,7 @@ import Card from "../UI/Card.js";
 import ExpenseFilter from "./ExpenseFilter";
 import React, { useState } from "react";
 import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 const Expenses = (props) => {
   //usestate is used to initialize a default year for the select element in expense filter component. this serves as a parent to child relationship component in which it sets the initial value of the expense filter component.
   const [filteredYear, setFilteredYear] = useState("2020");
@@ -24,6 +25,8 @@ const Expenses = (props) => {
 
   // we created another component called expensesList component to pass the new array containing all the items filtered per year. It has an argument with the function inside of it called filtered expenses.
 
+  // Expenses chart component is added and we passed the expenses array via properties
+
   return (
     <div>
       <Card className="expenses">
@@ -31,6 +34,7 @@ const Expenses = (props) => {
           defaultYear={filteredYear}
           onSelectedYear={saveSelectedYear}
         />
+        <ExpensesChart expenses={filteredExpenses} />
         <ExpensesList filteredExpenses={filteredExpenses} />
       </Card>
     </div>
